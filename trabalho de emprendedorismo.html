@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pack de Edição de Vídeo | ProCut Studio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121a2e;
+      --panel: #141d32;
+      --panel-strong: #1d2943;
+      --primary: #7c5cff;
+      --primary-2: #00d1ff;
+      --text: #edf2ff;
+      --muted: #afbdd9;
+      --accent: #ffb703;
+      --success: #35d399;
+      --danger: #ff5d73;
+      --shadow: rgba(11, 16, 32, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0a0f1d 0%, #10192f 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 16, 32, 0.8);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .brand span { color: var(--primary-2); }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .cta-mini {
+      padding: 11px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(124, 92, 255, 0.35);
+    }
+
+    .hero {
+      padding: 60px 0 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 38px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124, 92, 255, 0.14);
+      border: 1px solid rgba(124, 92, 255, 0.3);
+      color: #d7ccff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 8px 14px;
+    }
+
+    h1 {
+      margin: 20px 0 18px;
+      font-size: clamp(2.2rem, 4vw, 4.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 28px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      color: #fff;
+      box-shadow: 0 16px 30px rgba(112, 86, 255, 0.35);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--text);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .btn-primary:hover, .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .stats {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .stats strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .product-card {
+      background: linear-gradient(180deg, rgba(29, 41, 67, 0.9), rgba(17, 23, 38, 0.9));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: 0 28px 60px var(--shadow);
+    }
+
+    .product-box {
+      background: linear-gradient(160deg, #1b2645, #111827);
+      border-radius: 20px;
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      background: rgba(53, 211, 153, 0.12);
+      color: #baf7df;
+      border: 1px solid rgba(53, 211, 153, 0.28);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .mockup {
+      background: linear-gradient(180deg, rgba(124,92,255,0.18), rgba(0,209,255,0.12));
+      border-radius: 18px;
+      min-height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .mockup::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(124,92,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .screen {
+      position: relative;
+      z-index: 1;
+      width: 86%;
+      background: rgba(9, 15, 27, 0.8);
+      border-radius: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .screen-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .circles { display: flex; gap: 8px; }
+    .circles span {
+      width: 10px; height: 10px; border-radius: 50%; display: block;
+    }
+    .circles span:nth-child(1) { background: var(--danger); }
+    .circles span:nth-child(2) { background: var(--accent); }
+    .circles span:nth-child(3) { background: var(--success); }
+
+    .timeline {
+      height: 110px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(124,92,255,0.9), rgba(0,209,255,0.7), rgba(53,211,153,0.8));
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline::after {
+      content: "";
+      position: absolute;
+      inset: 18px 12% 18px 12%;
+      border-radius: 8px;
+      background: rgba(9,15,27,0.28);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .mini-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .mini-cards div {
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.76rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .features,
+    .reviews,
+    .pricing {
+      padding: 60px 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3vw, 3rem);
+      margin: 0 0 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 28px;
+      max-width: 700px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 26px;
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 26px 22px;
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(124,92,255,0.25), rgba(0,209,255,0.16));
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.2rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .video-box {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 26px;
+      padding: 18px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      border-radius: 16px;
+      max-height: 520px;
+      background: #000;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 26px;
+    }
+
+    .review-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px 20px;
+    }
+
+    .stars {
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    .review-card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .person {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    }
+
+    .person strong {
+      display: block;
+      font-size: 0.98rem;
+    }
+
+    .person span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .pricing-wrap {
+      background: linear-gradient(160deg, rgba(124,92,255,0.12), rgba(0,209,255,0.06));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 28px;
+      padding: 34px 26px;
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .old-price {
+      color: #b4bad2;
+      text-decoration: line-through;
+      font-size: 1.25rem;
+      margin-right: 8px;
+    }
+
+    .new-price {
+      display: inline-block;
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--success);
+      margin: 10px 0 18px;
+    }
+
+    .promo-tag {
+      display: inline-block;
+      background: rgba(255,183,3,0.12);
+      border: 1px solid rgba(255,183,3,0.3);
+      color: #ffd66c;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 12px;
+    }
+
+    .btn-large {
+      display: inline-block;
+      width: min(100%, 420px);
+      padding: 18px 24px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #14d38d 0%, #10b981 100%);
+      color: white;
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      box-shadow: 0 18px 35px rgba(20, 211, 141, 0.35);
+    }
+
+    footer {
+      padding: 40px 0 60px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 30px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .features-grid,
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">ProCut <span>Studio</span></div>
+      <nav class="nav-links">
+        <a href="#sobre">Sobre</a>
+        <a href="#video">Vídeo</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#comprar">Comprar</a>
+      </nav>
+      <a class="cta-mini" href="checkout.html">Comprar</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="sobre">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Melhore seus vídeos em 7 dias</div>
+          <h1>Pack profissional de edição de vídeo para alavancar seus conteúdos.</h1>
+          <p class="lead">
+            Templates premium, efeitos cinematicos, transições modernas e materiais prontos para você criar vídeos mais impactantes, vender melhor e destacar sua marca online.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn-primary" href="#comprar">Ver oferta</a>
+            <a class="btn-secondary" href="#video">Assistir vídeo</a>
+          </div>
+
+          <div class="stats">
+            <div><strong>+18.000</strong> clientes ativos</div>
+            <div><strong>4.9/5</strong> média de avaliação</div>
+            <div><strong>7 dias</strong> para começar</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-box">
+            <div class="badge">Novo pacote</div>
+            <div class="mockup">
+              <div class="screen">
+                <div class="screen-bar">
+                  <div class="circles">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <strong>ProCut Pack</strong>
+                </div>
+                <div class="timeline"></div>
+                <div class="mini-cards">
+                  <div>Pronto para Instagram</div>
+                  <div>Transitions</div>
+                  <div>Captions</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="video">
+      <div class="container">
+        <h2 class="section-title">Tudo o que vem no pack</h2>
+        <p class="section-sub">Um conjunto pensado para quem quer produzir vídeos com qualidade profissional sem depender de uma equipe inteira.</p>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎬</div>
+            <h3>Templates premium</h3>
+            <p>Mais de 200 modelos prontos para reels, vídeos institucionais, anúncios e materiais de vendas.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Fluxo rápido</h3>
+            <p>Organize cenas, edite com rapidez e entregue resultados profissionais em menos tempo.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">📈</div>
+            <h3>Mais resultados</h3>
+            <p>Crie vídeos que chamam atenção, aumentam a retenção e ajudam a converter mais clientes.</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 34px;" class="video-box">
+          <video controls poster="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+            Seu navegador não suporta vídeo HTML5.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews" id="avaliacoes">
+      <div class="container">
+        <h2 class="section-title">Avaliações de clientes</h2>
+        <p class="section-sub">Clientes reais ou fictícios para apresentação do projeto escolar, mas com a proposta de fortalecer a confiança na compra.</p>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"A qualidade dos vídeos melhorou muito e eu consegui vender mais em poucas semanas. O pack economizou meu tempo e deixou tudo muito profissional."</p>
+            <div class="person">
+              <div class="avatar">AB</div>
+              <div>
+                <strong>Ana Beatriz</strong>
+                <span>Produtora digital</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Fiz vários anúncios usando os templates e recebi elogios dos clientes. Vale totalmente a pena, principalmente pela praticidade."</p>
+            <div class="person">
+              <div class="avatar">ML</div>
+              <div>
+                <strong>Mateus Lima</strong>
+                <span>Marketing local</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"O material é bem completo, fácil de adaptar e ajuda muito em vídeos para redes sociais. A organização do pacote deixou tudo muito simples."</p>
+            <div class="person">
+              <div class="avatar">CS</div>
+              <div>
+                <strong>Carla Souza</strong>
+                <span>Conteúdo e branding</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing" id="comprar">
+      <div class="container">
+        <div class="pricing-wrap">
+          <div class="promo-tag">Oferta especial</div>
+          <div>
+            <span class="old-price">R$ 99,90</span>
+            <span class="new-price">R$ 50,00</span>
+          </div>
+          <p style="color: var(--muted); margin: 0 0 28px; font-size: 1.05rem;">
+            Aproveite o desconto por tempo limitado e leve o pack completo de edição de vídeo.
+          </p>
+          <a class="btn-large" href="checkout.html">Adquirir produto</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    ProCut Studio © 2026 · Pack premium de edição de vídeo
+  </footer>
+</body>
+</html>
