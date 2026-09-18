@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finalizar Compra | ProCut Studio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a2e;
+      --panel-strong: #1b2643;
+      --primary: #7c5cff;
+      --primary-2: #00d1ff;
+      --text: #edf2ff;
+      --muted: #afbdd9;
+      --success: #35d399;
+      --danger: #ff5d73;
+      --warning: #ffb703;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #0a0f1d, #10192f);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+    }
+
+    .wrapper {
+      width: min(980px, 100%);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: rgba(18, 26, 46, 0.96);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.22);
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      letter-spacing: -0.04em;
+    }
+
+    .sub {
+      color: var(--muted);
+      margin: 0 0 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.9rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 15px;
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: rgba(124,92,255,0.7);
+      box-shadow: 0 0 0 3px rgba(124,92,255,0.15);
+    }
+
+    .summary {
+      background: linear-gradient(180deg, rgba(124,92,255,0.12), rgba(0,209,255,0.06));
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 26px 22px;
+    }
+
+    .summary h2 {
+      margin: 0 0 18px;
+      font-size: 1.4rem;
+    }
+
+    .product-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 18px;
+    }
+
+    .thumb {
+      width: 68px;
+      height: 68px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+    }
+
+    .product-box strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    .product-box span {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .totals {
+      margin-top: 18px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    .row.total {
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-top: 12px;
+    }
+
+    .btn-buy {
+      width: 100%;
+      margin-top: 24px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #14d38d 0%, #10b981 100%);
+      color: white;
+      font-size: 1.02rem;
+      font-weight: 800;
+      padding: 18px 16px;
+      cursor: pointer;
+      box-shadow: 0 18px 35px rgba(20, 211, 141, 0.33);
+    }
+
+    .security {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 760px) {
+      .wrapper { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <section class="card">
+      <h1>Finalizar compra</h1>
+      <p class="sub">Complete os dados abaixo para adquirir o pack de edição de vídeo.</p>
+
+      <form>
+        <div class="form-grid">
+          <div class="field">
+            <label for="nome">Nome completo</label>
+            <input id="nome" type="text" placeholder="Seu nome" />
+          </div>
+
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" placeholder="seuemail@email.com" />
+          </div>
+
+          <div class="field full">
+            <label for="endereco">Endereço</label>
+            <input id="endereco" type="text" placeholder="Rua, número, bairro" />
+          </div>
+
+          <div class="field">
+            <label for="cidade">Cidade</label>
+            <input id="cidade" type="text" placeholder="Sua cidade" />
+          </div>
+
+          <div class="field">
+            <label for="estado">Estado</label>
+            <select id="estado">
+              <option>SP</option>
+              <option>RJ</option>
+              <option>MG</option>
+              <option>RS</option>
+              <option>PR</option>
+              <option>Outro</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="pagamento">Forma de pagamento</label>
+            <select id="pagamento">
+              <option>Cartão de crédito</option>
+              <option>Pix</option>
+              <option>Boleto</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="btn-buy" type="submit">Finalizar compra</button>
+      </form>
+    </section>
+
+    <aside class="summary">
+      <h2>Resumo do pedido</h2>
+
+      <div class="product-box">
+        <div class="thumb">🎬</div>
+        <div>
+          <strong>Pack de edição de vídeo</strong>
+          <span>Inclui templates + efeitos + materiais</span>
+        </div>
+      </div>
+
+      <div class="totals">
+        <div class="row"><span>Valor original</span><strong>R$ 99,90</strong></div>
+        <div class="row"><span>Desconto</span><strong>- R$ 49,90</strong></div>
+        <div class="row total"><span>Total</span><strong>R$ 50,00</strong></div>
+      </div>
+
+      <div class="security">🔒 Compra segura e protegida</div>
+    </aside>
+  </div>
+</body>
+</html>
